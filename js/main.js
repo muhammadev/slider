@@ -44,11 +44,11 @@ function sliderEngine() {
 	// initialize first image
 	slidesContainer.style.transform = `translateX(-${sliderWindow * counter}px)`;
 	// initialize first dot
-	dots.children[counter-1].style.background = "#6f6f6f";
+	dots.children[counter-1].style.background = "rgba(62, 62, 62, 0.9)";
 
 	// cursor pointer at left/right edges
 	document.body.addEventListener("mousemove", (e) => {
-		if (e.clientX >= (window.innerWidth/3 * 2) || e.clientX < (window.innerWidth/3)) {
+		if (e.clientX >= (window.innerWidth/4 * 3) || e.clientX < (window.innerWidth/4)) {
 			return document.body.style.cursor = "pointer";
 		}
 		document.body.style.cursor = "default";
@@ -56,12 +56,12 @@ function sliderEngine() {
 
 	// slide when click at left/right edges
 	document.addEventListener("click", (e) => {
-		if (e.clientX >= (window.innerWidth/3 * 2) && counter < 10) {
+		if (e.clientX >= (window.innerWidth/4 * 3) && counter < 10) {
 			counter++;
 			adjustSlides();
 		}
 
-		if (e.clientX < (window.innerWidth/3) && counter > 0) {
+		if (e.clientX < (window.innerWidth/4) && counter > 0) {
 			counter--;
 			adjustSlides();
 		}
@@ -100,13 +100,13 @@ function sliderEngine() {
 			dots.children[i].style.background = "rgba(255,255,255, .1)";
 		}
 		if (counter === 0) {
-			dots.children[8].style.background = "rgba(62, 62, 62, 0.8)";
+			dots.children[8].style.background = "rgba(62, 62, 62, 0.9)";
 		}
 		else if (counter === 10) {
-			dots.children[0].style.background = "rgba(62, 62, 62, 0.8)";
+			dots.children[0].style.background = "rgba(62, 62, 62, 0.9)";
 		}
 		else {
-			dots.children[counter-1].style.background = "rgba(62, 62, 62, 0.8)";
+			dots.children[counter-1].style.background = "rgba(62, 62, 62, 0.9)";
 		}
 	}
 
