@@ -49,7 +49,9 @@ function sliderEngine() {
 	// cursor pointer at left/right edges
 	document.body.addEventListener("mousemove", (e) => {
 		if (e.clientX >= (window.innerWidth/4 * 3) || e.clientX < (window.innerWidth/4)) {
-			return document.body.style.cursor = "pointer";
+			if (e.clientY >= (window.innerHeight/3) && e.clientY <= (window.innerHeight/3 * 2)) {
+				return document.body.style.cursor = "pointer";
+			}
 		}
 		document.body.style.cursor = "default";
 	})
@@ -57,13 +59,17 @@ function sliderEngine() {
 	// slide when click at left/right edges
 	document.addEventListener("click", (e) => {
 		if (e.clientX >= (window.innerWidth/4 * 3) && counter < 10) {
-			counter++;
-			adjustSlides();
+			if (e.clientY >= (window.innerHeight/3) && e.clientY <= (window.innerHeight/3 * 2)) {
+				counter++;
+				adjustSlides();
+			}
 		}
 
 		if (e.clientX < (window.innerWidth/4) && counter > 0) {
-			counter--;
-			adjustSlides();
+			if (e.clientY >= (window.innerHeight/3) && e.clientY <= (window.innerHeight/3 * 2)) {
+				counter--;
+				adjustSlides();
+			}
 		}
 	})
 
@@ -131,3 +137,9 @@ function sliderEngine() {
 	}
 }
 sliderEngine()
+
+let closeBtn = document.querySelector(".close");
+closeBtn.addEventListener("click", function() {
+	let controlGuide = document.querySelector(".control-guide");
+	controlGuide.style.display = "none";
+})
