@@ -6,23 +6,33 @@ let slides = slidesContainer.children;
 let blurred = document.querySelector(".blurred");
 let dots = document.querySelector(".dots");
 
-// add first/last images
-function firstLast() {
-let firstImgSrc = slides[0].src;
-let firstToLast = document.createElement("img");
-firstToLast.setAttribute("src", firstImgSrc);
-firstToLast.setAttribute("alt", "first-img-at-the-end");
-firstToLast.setAttribute("id", "firstToLast");
-slidesContainer.append(firstToLast);
 
-let lastImgSrc = slides[slides.length-2].src;
-let lastToFirst = document.createElement("img");
-lastToFirst.setAttribute("src", lastImgSrc);
-lastToFirst.setAttribute("alt", "last-img-at-the-top");
-lastToFirst.setAttribute("id", "lastToFirst");
-slidesContainer.insertBefore(lastToFirst, slidesContainer.firstChild);	
+let imgs = [
+	"imgs/forest.jpg",
+	"imgs/wolf.jpg",
+	"imgs/moon.jpg",
+	"imgs/small-flowers.jpg",
+	"imgs/window.jpg",
+	"imgs/milkandapple.jpg",
+	"imgs/mountain.jpg",
+	"imgs/city-mountain.jpg",
+	"imgs/green-mountain.jpg"
+]
+
+function imgsMaker(imgs) {
+	imgs.push(imgs[0]);
+	imgs.unshift(imgs[imgs.length-2]);
+
+	let holder = document.querySelector(".carousel-container");
+	for (let i=0; i < imgs.length; i++) {
+		let img = document.createElement("img");
+		img.setAttribute("src", imgs[i]);
+		img.setAttribute("id", i);
+		holder.append(img);
+	}
+	console.log("called")
 }
-firstLast();
+imgsMaker(imgs);
 
 // create images dots
 function imgsDots() {
@@ -43,6 +53,8 @@ function sliderEngine() {
 	
 	// initialize first image
 	slidesContainer.style.transform = `translateX(-${sliderWindow * counter}px)`;
+	// initialize first background image
+	blurred.style.background = `url(${slides[counter].src}) center/cover no-repeat`;
 	// initialize first dot
 	dots.children[counter-1].style.background = "rgba(62, 62, 62, 0.9)";
 
@@ -74,7 +86,7 @@ function sliderEngine() {
 	})
 
 	// slide when press left/right arrow keys
-	document.addEventListener("keyup", (e) => {
+	document.addEventListener("keydown", (e) => {
 		if (e.keyCode == 39 && counter < 10) {
 			counter++;
 			adjustSlides();
@@ -102,17 +114,19 @@ function sliderEngine() {
 	})
 
 	function adjustDots() {
+		const light = "rgba(255,255,255, .1)";
+		const dark = "rgba(32, 32, 32, .8)";
 		for (let i=0; i < dots.children.length; i++) {
-			dots.children[i].style.background = "rgba(255,255,255, .1)";
+			dots.children[i].style.background = light;
 		}
 		if (counter === 0) {
-			dots.children[8].style.background = "rgba(62, 62, 62, 0.9)";
+			dots.children[8].style.background = dark;
 		}
 		else if (counter === 10) {
-			dots.children[0].style.background = "rgba(62, 62, 62, 0.9)";
+			dots.children[0].style.background = dark;
 		}
 		else {
-			dots.children[counter-1].style.background = "rgba(62, 62, 62, 0.9)";
+			dots.children[counter-1].style.background = dark;
 		}
 	}
 
@@ -121,10 +135,7 @@ function sliderEngine() {
 		// transition here not to make it slide when initialize first image
 		slidesContainer.style.transition = `.3s ease`;
 
-		// timeout to make it nicer ** without timeout it lags a bit **
-		setTimeout(function() {
-			blurred.style.background = `url(${slides[counter].src}) center/cover no-repeat`
-		}, 250);
+		blurred.style.background = `url(${slides[counter].src}) center/cover no-repeat`;
 
 		adjustDots();
 	}

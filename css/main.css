@@ -20,6 +20,8 @@ body{
 	top:0; left: 0;
 	margin: 5px 15px;
 	z-index: 1;
+	color: #fff;
+	text-shadow: 0px 0px 10px #000;
 }
 
 .close {
@@ -41,7 +43,6 @@ ul {
 }
 
 .blurred {
-	transition: .3s;
 	position: absolute;
 	width: 100%; height: 100%;
 	background: url("../imgs/wolf.jpg") center/cover no-repeat;
@@ -58,7 +59,7 @@ ul {
 	overflow: hidden;
 	background: #333;
 	border-radius: 5px;
-	box-shadow: 0px 0px 5px 0px #333;
+	box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, .1);
 }
 
 @media screen and (max-width: 550px) {
