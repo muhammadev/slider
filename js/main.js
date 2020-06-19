@@ -103,7 +103,8 @@ function sliderEngine() {
 		if (counter == 10) {
 			counter = 1;
 			slidesContainer.style.transform = `translateX(-${sliderWindow * counter}px)`;
-			slidesContainer.style.transition = `none`;		
+			slidesContainer.style.transition = `none`;
+
 		}
 
 		if (counter == 0) {
@@ -137,6 +138,9 @@ function sliderEngine() {
 
 		blurred.style.background = `url(${slides[counter].src}) center/cover no-repeat`;
 
+		clearInterval(thisInterval);
+		thisInterval = setInterval(autoSliding, 5000);
+
 		adjustDots();
 	}
 
@@ -146,6 +150,13 @@ function sliderEngine() {
 			adjustSlides();
 		})
 	}
+
+	// slide every 5 seconds
+	function autoSliding() {
+		counter ++;
+		adjustSlides();
+	}
+	let thisInterval = setInterval(autoSliding, 5000);
 }
 sliderEngine()
 
