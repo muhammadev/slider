@@ -24,7 +24,17 @@ body{
 	text-shadow: 0px 0px 10px #000;
 }
 
-.close {
+.control-guide .open {
+	display: none;
+	padding: 5px;
+	border: 1px solid #666;
+	background: rgba(0,0,0, .1);
+	width: auto; height: auto;
+	line-height: 0;
+	cursor: pointer;
+}
+
+.control-guide .close {
 	width: 15px;
     background: #DC3545;
     display: inline-block;
@@ -38,8 +48,12 @@ body{
     cursor: pointer;
 }
 
-ul {
+.control-guide ul {
 	margin:0 10px; padding:0;
+}
+
+.control-guide .stopped {
+	background: #DC3545;
 }
 
 .blurred {
